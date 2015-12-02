@@ -37,7 +37,8 @@ $(document).ready(function() {
 ## Options
 
 * `username`: The user name to load the repositories for (required)
-* `sort`: The field to sort on (see Github API, default 'updated')
+* `sort`: The field to sort on (see Github API, default 'pushed')
+* `direction`: The direction of the sort, either `desc` (default) or `asc`
 * `template`: The template to use for rendering (this or `templateUrl` is required)
 * `templateUrl`: The URL of the template to use for rendering (this or `template` is required)
 * `cacheTime`: The cache time in hours. Defaults to 24h. Disable caching by setting `cacheTime` to 0
@@ -53,7 +54,9 @@ If both `template` and `templateUrl` are set, `templateUrl` takes precedence.
 
 ## Changelog
 
-* 0.0.1 - 2 December 2015
+* 2 December 2015
+  * Change `sort` default from `updated` to `pushed`
+  * Add `options.direction`
   * First commit
 
 ## License

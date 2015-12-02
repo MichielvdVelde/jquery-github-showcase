@@ -25,7 +25,7 @@
 		 * Fetch user repositories from Github
 		*/
 		var fetchRepositoriesFromGithub = function(callback) {
-			$.getJSON(options.baseUrl + '/users/' + options.username + '/repos?sort=' + ((options.sort) ? options.sort : 'updated'), function(repos) {
+			$.getJSON(options.baseUrl + '/users/' + options.username + '/repos?sort=' + ((options.sort) ? options.sort : 'pushed') + '&direction=' + (options.direction) ? options.direction : 'desc', function(repos) {
 				cacheRepositories(repos);
 				return callback(repos);
 			});
