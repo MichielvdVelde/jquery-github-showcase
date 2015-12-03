@@ -2,7 +2,7 @@
 
 This is a handy and simple to use jQuery plugin for showcasing your (or anyone else's) repositories on your own web site. It simply fetches the repositories from the Github API and you can add custom styling with templates and more.
 
-The code is completely client-side and has built-in client-side caching using `localStorage`.
+The code is completely client-side and has built-in client-side caching using `localStorage` if available (but can be customized, see below).
 
 It provides a rendering-agnostic interface with an optional `tranform` method. All properties from [the Github API Repositories](https://developer.github.com/v3/repos/#list-user-repositories) are available for use.
 
@@ -43,9 +43,12 @@ $(document).ready(function() {
 * `templateUrl`: The URL of the template to use for rendering (this or `template` is required)
 * `cacheTime`: The cache time in hours. Defaults to 24h. Disable caching by setting `cacheTime` to 0
 * `render`: The render method. Defaults to `Mustache.render` (if available), otherwise is not set. Any other method must take the same arguments
+* `store`: The cache store to use. Defaults to `localStorage` when available with **no** fallback, you need to handle this yourself
 * `transform`: An optional method to transform properties. See the example above
 
 If both `template` and `templateUrl` are set, `templateUrl` takes precedence.
+
+If you want to replace `localStorage` as the cache store, this object needs to have two methods: `getItem(key)` and `setItem(key, value)`.
 
 ## To do
 
@@ -54,6 +57,8 @@ If both `template` and `templateUrl` are set, `templateUrl` takes precedence.
 
 ## Changelog
 
+* 3 December 2015
+  * Make cache store type available in options
 * 2 December 2015
   * Change `sort` default from `updated` to `pushed`
   * Add `options.direction`

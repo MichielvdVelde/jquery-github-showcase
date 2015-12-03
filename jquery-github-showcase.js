@@ -6,7 +6,8 @@
 		options = $.extend({
 			'baseUrl': 'https://api.github.com',
 			'cacheTime': 24,
-			'render': (Mustache) ? Mustache.render : null
+			'render': (Mustache) ? Mustache.render : null,
+			'store': (localStorage) ? localStorage : null
 		}, options);
 
 		/**
@@ -14,7 +15,7 @@
 		 * or from the Github API
 		*/
 		var loadRepositories = function(callback) {
-			var cacheDate = (options.cacheTime === 0) ? (new Date()).getTime() : localStorage.getItem('gh-showcase.' + options.username + '.time') || (new Date()).getTime() - (options.cacheTime + 1) * 3600000;
+			var cacheDate = (options.cacheTime === 0) ? (new Date()).getTime() : options.store.getItem('gh-showcase.' + options.username + '.time') || (new Date()).getTime() - (options.cacheTime + 1) * 3600000;
 			var cacheExpired = (new Date()).getTime() - cacheDate > options.cacheTime * 3600000;
 			if(cacheExpired)
 				return fetchRepositoriesFromGithub(callback);
@@ -35,7 +36,7 @@
 		 * Fetch user repositories from cache
 		*/
 		var fetchRepositoriesFromStorage = function(callback) {
-			var repos = localStorage.getItem('gh-showcase.' + options.username + '.repos') || '[]';
+			var repos = options.store.getItem('gh-showcase.' + options.username + '.repos') || '[]';
 			return callback(JSON.parse(repos));
 		};
 
@@ -43,8 +44,8 @@
 		 * Cache repositories
 		*/
 		var cacheRepositories = function(repos) {
-			localStorage.setItem('gh-showcase.' + options.username + '.time', (new Date()).getTime());
-			localStorage.setItem('gh-showcase.' + options.username + '.repos', JSON.stringify(repos));
+			options.store.setItem('gh-showcase.' + options.username + '.time', (new Date()).getTime());
+			options.store.setItem('gh-showcase.' + options.username + '.repos', JSON.stringify(repos));
 		};
 
 		/**
