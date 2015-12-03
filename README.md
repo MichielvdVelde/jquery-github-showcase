@@ -52,6 +52,7 @@ If you want to replace `localStorage` as the cache store, this object needs to h
 
 ## To do
 
+* Build in some error handling instead of just crashing and failing
 * Improve render method handling (remove Mustache references from core code)
 * Publish on Bower and stuff
 
