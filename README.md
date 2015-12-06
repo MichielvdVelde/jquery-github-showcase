@@ -23,6 +23,8 @@ $(document).ready(function() {
 	$('#my-showcase').gh_showcase({
 		'username': 'MichielvdVelde',
 		'templateUrl': 'templates/github.tpl',
+		'renderer': Mustache.render,
+		'store': localStorage,
 		'transform': function(repo) {
 			// Use this method to transform repo properties when necessary
 			// In this case, convert the date to dd-mm-YYYY
@@ -42,22 +44,24 @@ $(document).ready(function() {
 * `template`: The template to use for rendering (this or `templateUrl` is required)
 * `templateUrl`: The URL of the template to use for rendering (this or `template` is required)
 * `cacheTime`: The cache time in hours. Defaults to 24h. Disable caching by setting `cacheTime` to 0
-* `render`: The render method. Defaults to `Mustache.render` (if available), otherwise is not set. Any other method must take the same arguments
-* `store`: The cache store to use. Defaults to `localStorage` when available with **no** fallback, you need to handle this yourself
+* `renderer` (**replaces `render`**): The render method. Should take `(template, scope)`. If no renderer is set, an error will be generated
+* `store`: The cache store to use. Should have `setItem(key, value)` and `getItem(key)`. If no store is set, an error will be generated
 * `transform`: An optional method to transform properties. See the example above
 
 If both `template` and `templateUrl` are set, `templateUrl` takes precedence.
 
-If you want to replace `localStorage` as the cache store, this object needs to have two methods: `getItem(key)` and `setItem(key, value)`.
-
 ## To do
 
-* Build in some error handling instead of just crashing and failing
-* Improve render method handling (remove Mustache references from core code)
 * Publish on Bower and stuff
 
 ## Changelog
 
+* 6 December 2015
+  * Updated readme with **breaking changes**
+  * Changed `options.render` to `options.renderer`
+  * `Mustache` and `localStorage` are **not** included by default anymore. `options` must now have these two defined!
+  * Rewrote cache expiry code
+  * Fixed Github repository URL
 * 3 December 2015
   * Make cache store type available in options
 * 2 December 2015
