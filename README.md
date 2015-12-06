@@ -50,6 +50,8 @@ $(document).ready(function() {
 
 If both `template` and `templateUrl` are set, `templateUrl` takes precedence.
 
+Another option is to just store the data in `sessionStorage`. This way you can disable the cache by setting `cacheTime` to `0`.
+
 ## To do
 
 * Publish on Bower and stuff
