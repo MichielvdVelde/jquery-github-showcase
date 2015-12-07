@@ -10,7 +10,9 @@ A demo is available [here](http://jquery-github-showcase.artofcoding.nl/), and y
 
 # Install
 
-For now you'll have to do it yourself. Download the source and extract it somewhere, for example to your `js/` directory.
+```
+bower install jquery-github-showcase
+```
 
 # Usage
 
@@ -59,6 +61,7 @@ Another option is to just store the data in `sessionStorage`. This way you can d
 ## Changelog
 
 * 6 December 2015
+  * v0.0.3 - Published on Bower
   * Updated readme with **breaking changes**
   * Changed `options.render` to `options.renderer`
   * `Mustache` and `localStorage` are **not** included by default anymore. `options` must now have these two defined!
